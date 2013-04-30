@@ -1,5 +1,4 @@
 "FROM HERE THIS IS NEOBUNDLE SETTINS
-"
 set nocompatible
 filetype off
 
@@ -16,7 +15,8 @@ NeoBundle 'https://github.com/thinca/vim-ref'
 NeoBundle 'https://github.com/alanstevens/Align'
 NeoBundle 'https://github.com/mattn/zencoding-vim'
 NeoBundle 'https://github.com/zhaocai/vimfiler'
-NeoBundle 'https://github.com/VimEz/Surround'
+NeoBundle 'https://github.com/vim-scripts/yanktmp.vim'
+NeoBundle 'https://github.com/tpope/vim-surround'
 "TO HERE THIS IS NEOBUNDLE SETTINGS
 
 "FROM HERE THIS IS NEOCOMPLCACHE SETTINGS
@@ -27,8 +27,6 @@ let g:neocomplcache_enable_underbar_completion = 1
 let g:neocomplcache_enable_camel_case_completion = 1
 let g:neocomplcache_max_list = 20
 let g:neocomplcache_min_syntax_length = 3
-
-
 "TO HERE THIS IS NEOCOMPLCACHE SETTINGS
 
 "FROM HERE THIS IS VIMREF SETTINGS
@@ -44,10 +42,10 @@ let g:ref_source_webdict_sites = {
 \   },
 \ }
 
-"デフォルトサイト
+"DEFAULT SITE
 let g:ref_source_webdict_sites.default = 'wiki'
-"TO HERE THIS IS VIMREF SETTINGS
 
+"TO HERE THIS IS VIMREF SETTINGS
 command! RL :source $MYVIMRC
 nnoremap <Space>. :edit $MYVIMRC<CR>
 nnoremap <ESC><ESC> :nohl<CR>
@@ -66,9 +64,9 @@ endfunction
 
 "FROM HERE THIS IS REMAPKEYS SETTINGS
 nnoremap <C-h> :help<Space>
-nnoremap <Nul>rw :Ref wiki<Space>
-nnoremap <Nul>rj :Ref je<Space>
-nnoremap <Nul>re :Ref ej<Space>
+nnoremap <Nul>rw :Ref webdict wiki<Space>
+nnoremap <Nul>rj :Ref webdict je<Space>
+nnoremap <Nul>re :Ref webdict ej<Space>
 nnoremap <Nul>f  :VimFiler<Space>
 nnoremap <Nul>x :QuickRun<Space>
 nnoremap <Nul>ru :Unite file_mru<Space>
@@ -79,11 +77,17 @@ nnoremap <Nul>gc :Gcommit<Space>
 "ZENCODIN
 inoremap <Nul>z, <C-y>,
 "TO HERE THIS IS REMAPKEYS SETTINGS
-"
+
 syntax on
 set number
 set smartcase
 set expandtab
+set softtabstop=4
+set tabstop=4
+set shiftwidth=4
+set fileencoding=utf-8
+set hls
+set tags=./tags
 
 " for quickrun.vim
 let g:quickrun_config = {
@@ -94,3 +98,28 @@ let g:quickrun_config = {
 \   }
 \ }
 
+
+function! SaveForWindows()
+    set fileencoding=utf8
+    "set fileformat=dos
+    set bomb
+endfunction
+
+function! RestoreForUnix()
+    set fileencoding=utf8
+    set fileformat=unix
+    set nobomb
+endfunction
+
+function! UpdateTags()
+    !ctags -R -f './tags'
+endfunction
+
+autocmd BufWritePre *.cs call SaveForWindows()
+autocmd BufWritePost *.cs call UpdateTags() | call UpdateTags()
+
+"FROM HERE YANKTMP PLUGIN SETTINGS
+map <silent> sy :call YanktmpYank()<CR> 
+map <silent> sp :call YanktmpPaste_p()<CR> 
+map <silent> sP :call YanktmpPaste_P()<CR> 
+"TO HERE YANKTMP PLUGZIN SETTING
