@@ -67,8 +67,16 @@ let g:ref_source_webdict_sites = {
 \   },
 \ }
 
+"FROM HERE THIS IS UNITE VIM SETTINGS
+let g:unite_enable_start_insert = 1
+let g:unite_source_file_mru_limit = 500
+"TO HERE THIS IS UNITE VIM SETTINGS
+
+
 "DEFAULT SITE
 let g:ref_source_webdict_sites.default = 'wiki'
+let g:ref_phpmanual_path = '/Users/noriyoshi.samata/.vim/bundle/vim-ref/phpdoc/'
+let g:ref_open = "vsplit"
 "TO HERE THIS IS VIMREF SETTINGS
 
 command! RL :source $MYVIMRC
@@ -86,6 +94,13 @@ else
 set number
 endif
 endfunction
+
+"CHANGE SIZE
+nnoremap ,h <C-w>><CR>
+nnoremap ,j <C-w>-<CR>
+nnoremap ,k <C-w>+<CR>
+nnoremap ,l <C-w><<CR>
+
 
 "FROM HERE THIS IS REMAPKEYS SETTINGS
 nnoremap <C-h> :help<Space>
@@ -123,6 +138,13 @@ let g:quickrun_config = {
 \   }
 \ }
 
+"行末ハイライト
+augroup HighlightTrailingSpaces
+  autocmd!
+  autocmd VimEnter,WinEnter,ColorScheme * highlight TrailingSpaces term=underline guibg=Red ctermbg=Red
+  autocmd VimEnter,WinEnter * match TrailingSpaces /\s\+$/
+augroup END
+
 
 " For Unity development
 function! SaveForWindows()
@@ -138,14 +160,15 @@ function! RestoreForUnix()
 endfunction
 
 function! UpdateTags()
-    !ctags -R -f './tags'
+    !/usr/local/bin/ctags -R -f './tags'
 endfunction
 
 autocmd BufWritePre *.cs call SaveForWindows()
-autocmd BufWritePost *.cs call UpdateTags() | call UpdateTags()
+autocmd BufWritePost *.cs call UpdateTags()
 
 "FROM HERE YANKTMP PLUGIN SETTINGS
-map <silent> sy :call YanktmpYank()<CR> 
-map <silent> sp :call YanktmpPaste_p()<CR> 
-map <silent> sP :call YanktmpPaste_P()<CR> 
+map <silent> sy :call YanktmpYank()<CR>
+map <silent> sp :call YanktmpPaste_p()<CR>
+map <silent> sP :call YanktmpPaste_P()<CR>
 "TO HERE YANKTMP PLUGZIN SETTING
+
