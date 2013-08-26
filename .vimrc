@@ -26,6 +26,7 @@ NeoBundle 'https://github.com/alanstevens/Align'
 NeoBundle 'https://github.com/vim-scripts/yanktmp.vim'
 NeoBundle 'https://github.com/vim-scripts/ShowMarks'
 NeoBundle 'bling/vim-airline'
+NeoBundle 'https://github.com/altercation/solarized'
 "TO HERE THIS IS NEOBUNDLE SETTINGS
 
 "FROM HERE THIS IS NEOCOMPLCACHE SETTINGS
@@ -74,6 +75,23 @@ let g:unite_enable_start_insert = 1
 let g:unite_source_file_mru_limit = 500
 "TO HERE THIS IS UNITE VIM SETTINGS
 
+
+"FROM AIRLINE SETTING
+let g:airline_enable_branch = 0
+let g:airline_section_b = "%t %M"
+let g:airline_section_c = ''
+let s:sep = " %{get(g:, 'airline_right_alt_sep', '')} "
+let g:airline_section_x =
+    \ "%{strlen(&fileformat)?&fileformat:''}".s:sep.
+    \ "%{strlen(&fenc)?&fenc:&enc}".s:sep.
+    \ "%{strlen(&filetype)?&filetype:'no ft'}"
+let g:airline_section_y = '%3p%%'
+let g:airline_section_z = get(g:, 'airline_linecolumn_prefix', '').'%3l:%-2v'
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '◀'
+let g:airline_theme='solarized'
+"TO AIRLINE SETTING
 
 "DEFAULT SITE
 let g:ref_source_webdict_sites.default = 'wiki'
@@ -136,6 +154,10 @@ set fileencoding=utf-8
 set hls
 set tags=./tags
 set foldmethod=marker
+set background=dark
+set laststatus=2
+colorscheme solarized
+
 
 
 " for quickrun.vim
@@ -168,3 +190,5 @@ map <silent> sp :call YanktmpPaste_p()<CR>
 map <silent> sP :call YanktmpPaste_P()<CR>
 "TO HERE YANKTMP PLUGZIN SETTING
 
+source ~/.vimrc_encode
+map <C-e><C-e> :e ++enc=euc-jp<CR>
