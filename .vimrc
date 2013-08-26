@@ -8,7 +8,7 @@ if has('vim_starting')
 endif
 call neobundle#rc(expand('~/.vim/bundle/'))
 
-NeoBundle 'https://github.com/Shougo/vimproc'
+NeoBundle 'https://github.com/Shougo/vimproc.vim'
 NeoBundle 'https://github.com/Shougo/unite.vim'
 NeoBundle 'https://github.com/Shougo/neocomplcache'
 NeoBundle 'https://github.com/Shougo/neosnippet'
@@ -21,9 +21,11 @@ NeoBundle 'https://github.com/tpope/vim-surround'
 NeoBundle 'https://github.com/tpope/vim-fugitive'
 NeoBundle 'https://github.com/kana/vim-smartinput'
 NeoBundle 'https://github.com/kana/vim-smartchr'
-NeoBundle 'https://github.com/zhaocai/vimfiler'
+NeoBundle 'https://github.com/Shougo/vimfiler.vim'
 NeoBundle 'https://github.com/alanstevens/Align'
 NeoBundle 'https://github.com/vim-scripts/yanktmp.vim'
+NeoBundle 'https://github.com/vim-scripts/ShowMarks'
+NeoBundle 'bling/vim-airline'
 "TO HERE THIS IS NEOBUNDLE SETTINGS
 
 "FROM HERE THIS IS NEOCOMPLCACHE SETTINGS
@@ -66,7 +68,7 @@ let g:ref_source_webdict_sites = {
 \     'url': 'http://ja.wikipedia.org/wiki/%s',
 \   },
 \ }
-
+.
 "FROM HERE THIS IS UNITE VIM SETTINGS
 let g:unite_enable_start_insert = 1
 let g:unite_source_file_mru_limit = 500
@@ -103,31 +105,38 @@ nnoremap ,l <C-w><<CR>
 
 
 "FROM HERE THIS IS REMAPKEYS SETTINGS
-nnoremap <C-h> :help<Space>
-nnoremap <Nul>rw :Ref webdict wiki<Space>
-nnoremap <Nul>rj :Ref webdict je<Space>
-nnoremap <Nul>re :Ref webdict ej<Space>
-nnoremap <Nul>f  :VimFiler<Space>
-nnoremap <Nul>x  :QuickRun<Space>
-nnoremap <Nul>ru :Unite file_mru<Space>
-nnoremap <Nul>gd :Gdiff<Space>
-nnoremap <Nul>gb :Gblame<Space>
-nnoremap <Nul>gc :Gcommit<Space>
+nnoremap <C-h>   : help<Space>
+nnoremap <Nul>rw : Ref webdict wiki<Space>
+nnoremap <Nul>rj : Ref webdict je<Space>
+nnoremap <Nul>re : Ref webdict ej<Space>
+nnoremap <Nul>f  : VimFiler<Space>
+nnoremap <Nul>x  : QuickRun<Space>
+nnoremap <Nul>ru : Unite file_mru<Space>
+nnoremap <Nul>gd : Gdiff<Space>
+nnoremap <Nul>gb : Gblame<Space>
+nnoremap <Nul>gc : Gcommit<Space>
+nnoremap <Nul>a  : Align<Space>
+vnoremap <Nul>a  : Align<Space>
 
 "ZENCODIN
 inoremap <Nul>z, <C-y>,
 "TO HERE THIS IS REMAPKEYS SETTINGS
 
+
 syntax on
+hi Comment ctermfg=6
 set number
 set smartcase
 set expandtab
 set softtabstop=4
 set tabstop=4
 set shiftwidth=4
+set fileencodings=iso-2022-jp,cp932,sjis,euc-jp,utf-8
 set fileencoding=utf-8
 set hls
 set tags=./tags
+set foldmethod=marker
+
 
 " for quickrun.vim
 let g:quickrun_config = {
@@ -145,26 +154,13 @@ augroup HighlightTrailingSpaces
   autocmd VimEnter,WinEnter * match TrailingSpaces /\s\+$/
 augroup END
 
-
-" For Unity development
-function! SaveForWindows()
-    set fileencoding=utf8
-    "set fileformat=dos
-    set bomb
+function! SetTplFolding()
+    set foldmethod=marker
+    set foldmarker=<<<,>>>
 endfunction
+autocmd BufReadPre *.tpl call SetTplFolding()
 
-function! RestoreForUnix()
-    set fileencoding=utf8
-    set fileformat=unix
-    set nobomb
-endfunction
 
-function! UpdateTags()
-    !/usr/local/bin/ctags -R -f './tags'
-endfunction
-
-autocmd BufWritePre *.cs call SaveForWindows()
-autocmd BufWritePost *.cs call UpdateTags()
 
 "FROM HERE YANKTMP PLUGIN SETTINGS
 map <silent> sy :call YanktmpYank()<CR>
