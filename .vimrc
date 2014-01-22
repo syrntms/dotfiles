@@ -1,5 +1,4 @@
-"FROM HERE THIS IS NEOBUNDLE SETTINS
-
+"FROM HERE THIS IS NEOBUNDLE SETTINS 
 set nocompatible
 filetype off
 
@@ -12,7 +11,6 @@ NeoBundle 'https://github.com/Shougo/vimproc.vim'
 NeoBundle 'https://github.com/Shougo/unite.vim'
 NeoBundle 'https://github.com/Shougo/neocomplcache'
 NeoBundle 'https://github.com/Shougo/neosnippet'
-NeoBundle 'https://github.com/Shougo/echodoc'
 NeoBundle 'https://github.com/thinca/vim-quickrun'
 NeoBundle 'https://github.com/thinca/vim-ref'
 NeoBundle 'https://github.com/mattn/zencoding-vim'
@@ -24,9 +22,11 @@ NeoBundle 'https://github.com/kana/vim-smartchr'
 NeoBundle 'https://github.com/Shougo/vimfiler.vim'
 NeoBundle 'https://github.com/alanstevens/Align'
 NeoBundle 'https://github.com/vim-scripts/yanktmp.vim'
-NeoBundle 'https://github.com/vim-scripts/ShowMarks'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'https://github.com/altercation/solarized'
+NeoBundle 'https://github.com/t9md/vim-quickhl'
+NeoBundle 'https://github.com/vim-scripts/taglist.vim'
+NeoBundle 'https://github.com/vim-scripts/YankRing.vim'
 "TO HERE THIS IS NEOBUNDLE SETTINGS
 
 "FROM HERE THIS IS NEOCOMPLCACHE SETTINGS
@@ -69,7 +69,12 @@ let g:ref_source_webdict_sites = {
 \     'url': 'http://ja.wikipedia.org/wiki/%s',
 \   },
 \ }
-.
+
+let g:ref_phpmanual_path = $HOME . '/.vim/doc/php/php-chunked-xhtml/'
+let g:ref_source_webdict_sites.default = 'wiki'
+let g:ref_open = "vsplit"
+nnoremap <Nul>rd :execute 'Ref phpmanual ' . expand('<cword>') <CR>
+"TO HERE THIS IS VIMREF SETTINGS
 "FROM HERE THIS IS UNITE VIM SETTINGS
 let g:unite_enable_start_insert = 1
 let g:unite_source_file_mru_limit = 500
@@ -92,12 +97,6 @@ let g:airline_left_sep = '▶'
 let g:airline_right_sep = '◀'
 let g:airline_theme='solarized'
 "TO AIRLINE SETTING
-
-"DEFAULT SITE
-let g:ref_source_webdict_sites.default = 'wiki'
-let g:ref_phpmanual_path = '/Users/noriyoshi.samata/.vim/bundle/vim-ref/phpdoc/'
-let g:ref_open = "vsplit"
-"TO HERE THIS IS VIMREF SETTINGS
 
 command! RL :source $MYVIMRC
 nnoremap <Space>. :edit $MYVIMRC<CR>
@@ -152,11 +151,14 @@ set shiftwidth=4
 set fileencodings=iso-2022-jp,cp932,sjis,euc-jp,utf-8
 set fileencoding=utf-8
 set hls
-set tags=./tags
+set tags=$HOME/.tags/tags
 set foldmethod=marker
 set background=dark
 set laststatus=2
+set ambiwidth=double
+set linespace=30
 colorscheme solarized
+let g:solarized_termtrans=1
 
 
 
@@ -180,8 +182,15 @@ function! SetTplFolding()
     set foldmethod=marker
     set foldmarker=<<<,>>>
 endfunction
+
+
 autocmd BufReadPre *.tpl call SetTplFolding()
 
+"From ShowMarks
+let g:showmarks_hlline_lower=1
+"let g:showmarks_hlline_uppder=1
+"let g:showmarks_hlline_other=1
+"To ShowMarks
 
 
 "FROM HERE YANKTMP PLUGIN SETTINGS
@@ -190,5 +199,31 @@ map <silent> sp :call YanktmpPaste_p()<CR>
 map <silent> sP :call YanktmpPaste_P()<CR>
 "TO HERE YANKTMP PLUGZIN SETTING
 
+"FROM HERE QUICKHL PLUGIN SETTINGS
+let g:quickhl_manual_colors = [
+        \ "gui=bold ctermfg=7   ctermbg=1   guibg=#ffffff guifg=#ffffff",
+        \ "gui=bold ctermfg=7   ctermbg=2   guibg=#ffffff guifg=#ffffff",
+        \ "gui=bold ctermfg=7   ctermbg=3   guibg=#ffffff guifg=#ffffff",
+        \ "gui=bold ctermfg=7   ctermbg=4   guibg=#ffffff guifg=#ffffff",
+        \ "gui=bold ctermfg=7   ctermbg=5   guibg=#ffffff guifg=#ffffff",
+        \ "gui=bold ctermfg=7   ctermbg=6   guibg=#ffffff guifg=#ffffff",
+        \ "gui=bold ctermfg=7   ctermbg=1   guibg=#ffffff guifg=#ffffff",
+        \ "gui=bold ctermfg=7   ctermbg=2   guibg=#ffffff guifg=#ffffff",
+        \ "gui=bold ctermfg=7   ctermbg=3   guibg=#ffffff guifg=#ffffff",
+        \ "gui=bold ctermfg=7   ctermbg=4   guibg=#ffffff guifg=#ffffff",
+        \ "gui=bold ctermfg=7   ctermbg=5   guibg=#ffffff guifg=#ffffff",
+        \ "gui=bold ctermfg=7   ctermbg=6   guibg=#ffffff guifg=#ffffff",
+        \ ]
+nmap <Space>hl <Plug>(quickhl-manual-this)
+xmap <Space>hl <Plug>(quickhl-manual-this)
+nmap <Space>hr <Plug>(quickhl-manual-reset)
+xmap <Space>hr <Plug>(quickhl-manual-reset)
+nmap <Space>hc <Plug>(quickhl-cword-toggle)
+nmap <Space>ht <Plug>(quickhl-tag-toggle)
+"TO HERE QUICKHL PLUGZIN SETTING
+
+"FROM HERE TAGLIST PLUGIN SETTINGS
+nnoremap <Nul>tl :Tlist <CR>
+"TO HERE TAGLIST PLUGZIN SETTING
 source ~/.vimrc_encode
 map <C-e><C-e> :e ++enc=euc-jp<CR>
