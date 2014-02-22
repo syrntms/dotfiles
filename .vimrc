@@ -1,4 +1,4 @@
-"FROM HERE THIS IS NEOBUNDLE SETTINS 
+"FROM HERE THIS IS NEOBUNDLE SETTINS
 set nocompatible
 filetype off
 
@@ -14,19 +14,18 @@ NeoBundle 'https://github.com/Shougo/neosnippet'
 NeoBundle 'https://github.com/thinca/vim-quickrun'
 NeoBundle 'https://github.com/thinca/vim-ref'
 NeoBundle 'https://github.com/mattn/zencoding-vim'
-NeoBundle 'https://github.com/mattn/webapi-vim'
 NeoBundle 'https://github.com/tpope/vim-surround'
 NeoBundle 'https://github.com/tpope/vim-fugitive'
 NeoBundle 'https://github.com/kana/vim-smartinput'
-NeoBundle 'https://github.com/kana/vim-smartchr'
 NeoBundle 'https://github.com/Shougo/vimfiler.vim'
 NeoBundle 'https://github.com/alanstevens/Align'
 NeoBundle 'https://github.com/vim-scripts/yanktmp.vim'
-NeoBundle 'bling/vim-airline'
+NeoBundle 'https://github.com/itchyny/lightline.vim'
 NeoBundle 'https://github.com/altercation/solarized'
 NeoBundle 'https://github.com/t9md/vim-quickhl'
 NeoBundle 'https://github.com/vim-scripts/taglist.vim'
 NeoBundle 'https://github.com/vim-scripts/YankRing.vim'
+NeoBundle 'https://github.com/scrooloose/syntastic'
 "TO HERE THIS IS NEOBUNDLE SETTINGS
 
 "FROM HERE THIS IS NEOCOMPLCACHE SETTINGS
@@ -38,6 +37,14 @@ let g:neocomplcache_enable_camel_case_completion = 1
 let g:neocomplcache_max_list = 20
 let g:neocomplcache_min_syntax_length = 3
 "TO HERE THIS IS NEOCOMPLCACHE SETTINGS
+
+"FROM HERE THIS IS VIMFILER SETTINGS
+let g:vimfiler_as_default_explorer = 1
+"TO HERE THIS IS VIMFILERSETTINGS
+
+"FROM HERE THIS IS SYNTASTICS SETTINGS
+let g:syntastic_always_populate_loc_list=1
+"TO HERE THIS IS SYNTASTICS SETTINGS
 
 "Plugin key-mapping
 imap <C-k>  <Plug>(neosnippet_expand_or_jump)
@@ -73,30 +80,10 @@ let g:ref_source_webdict_sites = {
 let g:ref_phpmanual_path = $HOME . '/.vim/doc/php/php-chunked-xhtml/'
 let g:ref_source_webdict_sites.default = 'wiki'
 let g:ref_open = "vsplit"
-nnoremap <Nul>rd :execute 'Ref phpmanual ' . expand('<cword>') <CR>
 "TO HERE THIS IS VIMREF SETTINGS
 "FROM HERE THIS IS UNITE VIM SETTINGS
-let g:unite_enable_start_insert = 1
 let g:unite_source_file_mru_limit = 500
 "TO HERE THIS IS UNITE VIM SETTINGS
-
-
-"FROM AIRLINE SETTING
-let g:airline_enable_branch = 0
-let g:airline_section_b = "%t %M"
-let g:airline_section_c = ''
-let s:sep = " %{get(g:, 'airline_right_alt_sep', '')} "
-let g:airline_section_x =
-    \ "%{strlen(&fileformat)?&fileformat:''}".s:sep.
-    \ "%{strlen(&fenc)?&fenc:&enc}".s:sep.
-    \ "%{strlen(&filetype)?&filetype:'no ft'}"
-let g:airline_section_y = '%3p%%'
-let g:airline_section_z = get(g:, 'airline_linecolumn_prefix', '').'%3l:%-2v'
-let g:airline#extensions#whitespace#enabled = 0
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '◀'
-let g:airline_theme='solarized'
-"TO AIRLINE SETTING
 
 command! RL :source $MYVIMRC
 nnoremap <Space>. :edit $MYVIMRC<CR>
@@ -116,26 +103,25 @@ endfunction
 
 "CHANGE SIZE
 nnoremap ,h <C-w>><CR>
-nnoremap ,j <C-w>-<CR>
-nnoremap ,k <C-w>+<CR>
+nnoremap ,k <C-w>-<CR>
+nnoremap ,j <C-w>+<CR>
 nnoremap ,l <C-w><<CR>
 
 
 "FROM HERE THIS IS REMAPKEYS SETTINGS
-nnoremap <C-h>   : help<Space>
+nnoremap <C-h>   : vert help<Space>
 nnoremap <Nul>rw : Ref webdict wiki<Space>
 nnoremap <Nul>rj : Ref webdict je<Space>
 nnoremap <Nul>re : Ref webdict ej<Space>
-nnoremap <Nul>f  : VimFiler<Space>
-nnoremap <Nul>x  : QuickRun<Space>
-nnoremap <Nul>ru : Unite file_mru<Space>
-nnoremap <Nul>gd : Gdiff<Space>
-nnoremap <Nul>gb : Gblame<Space>
-nnoremap <Nul>gc : Gcommit<Space>
+nnoremap <Nul>f  : VimFiler<CR>
+nnoremap <Nul>x  : QuickRun<CR>
+nnoremap <Nul>ru : Unite file_mru<CR>
+nnoremap <Nul>gd : Gdiff<CR><C-w>w
+nnoremap <Nul>gb : Gblame<CR>
 nnoremap <Nul>a  : Align<Space>
 vnoremap <Nul>a  : Align<Space>
-
-"ZENCODIN
+nnoremap <Nul>rd :execute 'Ref phpmanual ' . expand('<cword>') <CR>
+nnoremap <Nul>tl :Tlist <CR> <C-w>w
 inoremap <Nul>z, <C-y>,
 "TO HERE THIS IS REMAPKEYS SETTINGS
 
@@ -151,7 +137,7 @@ set shiftwidth=4
 set fileencodings=iso-2022-jp,cp932,sjis,euc-jp,utf-8
 set fileencoding=utf-8
 set hls
-set tags=$HOME/.tags/tags
+set tags=$HOME/.tags/tags,$HOME/.tags/gree_tags,$HOME/.tags/gree_default_tags
 set foldmethod=marker
 set background=dark
 set laststatus=2
@@ -159,6 +145,7 @@ set ambiwidth=double
 set linespace=30
 colorscheme solarized
 let g:solarized_termtrans=1
+set t_Co=256
 
 
 
@@ -192,6 +179,11 @@ let g:showmarks_hlline_lower=1
 "let g:showmarks_hlline_other=1
 "To ShowMarks
 
+"FROM LIGHTLINE
+let g:lightline = {
+    \ 'colorscheme': 'solarized',
+\ }
+"TO LIGHTLINE
 
 "FROM HERE YANKTMP PLUGIN SETTINGS
 map <silent> sy :call YanktmpYank()<CR>
@@ -222,8 +214,5 @@ nmap <Space>hc <Plug>(quickhl-cword-toggle)
 nmap <Space>ht <Plug>(quickhl-tag-toggle)
 "TO HERE QUICKHL PLUGZIN SETTING
 
-"FROM HERE TAGLIST PLUGIN SETTINGS
-nnoremap <Nul>tl :Tlist <CR>
-"TO HERE TAGLIST PLUGZIN SETTING
 source ~/.vimrc_encode
 map <C-e><C-e> :e ++enc=euc-jp<CR>
