@@ -1,0 +1,67 @@
+[color]
+	ui = true
+[core]
+	pager = lv -c
+[push]
+	default = tracking
+[alias]
+	st = -p status
+	ss = -p status -sb
+	co = checkout
+	ci = commit -v
+	ca = commit -av
+	cam = commit --amend -v
+	di = diff
+	dc = diff --cached
+	br = branch
+	cb = checkout -b
+	sw = checkout
+	mup = submodule update --init --recursive
+	madd = submodule add
+	mst = -p submodule status --recursive
+	msync = submodule sync
+	meach = submodule each
+	mclean = \\!sh -c 'git submodule foreach \"git clean $@\"' .
+	mff = "\\!sh -c 'for d in \"${@-.}\"; do (cd \"$d\" && [ -f .git ] && git fetch && git checkout origin); done' ."
+	um = \\!sh -c 'git pull \"$@\" && git mup' .
+	up = !git um --rebase
+	wdi = diff --word-diff
+	wdc = diff --word-diff --cached
+	au = add -u
+	ri = rebase -i
+	rio = rebase -i origin
+	rim = rebase -i master
+	rc = rebase --continue
+	rab = rebase --abort
+	rs = rebase --skip
+	mab = merge --abort
+	chp = cherry-pick
+	mt = mergetool
+	unadd = reset --
+	rollback = reset HEAD^ --
+	unci = reset --soft HEAD^
+	hreset = reset --hard
+	ap = add -p
+	unap = reset -p
+	cop = checkout -p
+	l = log --decorate --numstat --summary
+	ll = log --decorate --numstat --summary --pretty=fuller -p
+	wll = log --decorate --numstat --summary --pretty=fuller -p --word-diff
+	ol = log --oneline --decorate
+	t = log --graph --oneline --decorate
+	g = grep
+	xl = stash list
+	xi = stash save
+	xo = stash pop
+	xd = stash drop
+	xa = stash apply
+	xs = stash show
+	xp = stash show -p
+	xup = !git xi && git up && git xo
+	www = browse-remote
+	ds = diff --stat
+	sti = -p status --ignore-submodules
+[diff]
+	wordRegex = [@$%]*[[:alnum:]_]+|[^\n]
+[http]
+	postBuffer = 10485760
