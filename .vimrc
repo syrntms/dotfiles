@@ -26,6 +26,7 @@ NeoBundle 'https://github.com/t9md/vim-quickhl'
 NeoBundle 'https://github.com/vim-scripts/taglist.vim'
 NeoBundle 'https://github.com/vim-scripts/YankRing.vim'
 NeoBundle 'https://github.com/scrooloose/syntastic'
+NeoBundle 'https://github.com/osyo-manga/vim-over'
 "TO HERE THIS IS NEOBUNDLE SETTINGS
 
 "FROM HERE THIS IS NEOCOMPLCACHE SETTINGS
@@ -37,6 +38,10 @@ let g:neocomplcache_enable_camel_case_completion = 1
 let g:neocomplcache_max_list = 20
 let g:neocomplcache_min_syntax_length = 3
 "TO HERE THIS IS NEOCOMPLCACHE SETTINGS
+
+"FROM VIM OVER SETTINGS
+let g:over_enable_cmd_window = 1
+"TO VIM OVER SETTINGS
 
 "FROM HERE THIS IS VIMFILER SETTINGS
 let g:vimfiler_as_default_explorer = 1
@@ -123,6 +128,7 @@ vnoremap <Nul>a  : Align<Space>
 nnoremap <Nul>rd :execute 'Ref phpmanual ' . expand('<cword>') <CR>
 nnoremap <Nul>tl :Tlist <CR> <C-w>w
 inoremap <Nul>z, <C-y>,
+cnoremap %s OverCommandLine<CR>%s/
 "TO HERE THIS IS REMAPKEYS SETTINGS
 
 
@@ -131,6 +137,7 @@ hi Comment ctermfg=6
 set number
 set smartcase
 set expandtab
+set ic
 set softtabstop=4
 set tabstop=4
 set shiftwidth=4
@@ -172,12 +179,6 @@ endfunction
 
 
 autocmd BufReadPre *.tpl call SetTplFolding()
-
-"From ShowMarks
-let g:showmarks_hlline_lower=1
-"let g:showmarks_hlline_uppder=1
-"let g:showmarks_hlline_other=1
-"To ShowMarks
 
 "FROM LIGHTLINE
 let g:lightline = {
