@@ -128,7 +128,7 @@ vnoremap <Nul>a  : Align<Space>
 nnoremap <Nul>rd :execute 'Ref phpmanual ' . expand('<cword>') <CR>
 nnoremap <Nul>tl :Tlist <CR> <C-w>w
 inoremap <Nul>z, <C-y>,
-cnoremap %s OverCommandLine<CR>%s/
+cnoremap %s/ OverCommandLine<CR>%s/
 "TO HERE THIS IS REMAPKEYS SETTINGS
 
 
