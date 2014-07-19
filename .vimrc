@@ -27,6 +27,9 @@ NeoBundle 'https://github.com/vim-scripts/taglist.vim'
 NeoBundle 'https://github.com/vim-scripts/YankRing.vim'
 NeoBundle 'https://github.com/scrooloose/syntastic'
 NeoBundle 'https://github.com/osyo-manga/vim-over'
+NeoBundle 'https://github.com/thinca/vim-threes'
+NeoBundle 'joonty/vdebug'
+NeoBundle 'https://github.com/syrntms/unite-tag'
 "TO HERE THIS IS NEOBUNDLE SETTINGS
 
 "FROM HERE THIS IS NEOCOMPLCACHE SETTINGS
@@ -121,7 +124,7 @@ nnoremap <Nul>re : Ref webdict ej<Space>
 nnoremap <Nul>f  : VimFiler<CR>
 nnoremap <Nul>x  : QuickRun<CR>
 nnoremap <Nul>ru : Unite file_mru<CR>
-nnoremap <Nul>gd : Gdiff<CR><C-w>w
+nnoremap <Nul>gd : Gdiff 
 nnoremap <Nul>gb : Gblame<CR>
 nnoremap <Nul>a  : Align<Space>
 vnoremap <Nul>a  : Align<Space>
@@ -215,5 +218,15 @@ nmap <Space>hc <Plug>(quickhl-cword-toggle)
 nmap <Space>ht <Plug>(quickhl-tag-toggle)
 "TO HERE QUICKHL PLUGZIN SETTING
 
+autocmd BufEnter *
+\    if empty(&buftype)
+\|   nnoremap <buffer> <C-]> :<C-u>UniteWithCursorWord -horizontal -immediately -multi-line tag<CR>
+\|   endif
+let g:unite_source_tag_strict_truncate_string=0
+let g:unite_source_tag_max_fname_length=1023
+let g:unite_source_tag_max_name_length=0
+let g:unite_source_tag_max_candidate_length=4095
+
 source ~/.vimrc_encode
 map <C-e><C-e> :e ++enc=euc-jp<CR>
+
