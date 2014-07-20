@@ -231,7 +231,7 @@ let g:unite_source_tag_max_candidate_length=4095
 source ~/.vimrc_encode
 map <C-e><C-e> :e ++enc=euc-jp<CR>
 
-let g:repo_type = 'ayc'
+let g:repo_type = 'knight'
 let g:repo_settings = {
 \   'knight' : {
 \       'ctags' : {
@@ -239,7 +239,9 @@ let g:repo_settings = {
 \           'exe'       : '',
 \           'code_root' : '',
 \           'out_path'  : '',
-\           'in_path'   : '',
+\           'in_path'   : $HOME . '/.tags/gree_default_tags,'
+\               . $HOME . '/.tags/gree_tags,'
+\               . $HOME . '/.tags/tags,'
 \       },
 \   },
 \   'ayc' : {
