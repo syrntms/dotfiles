@@ -11,6 +11,7 @@ NeoBundle 'https://github.com/Shougo/vimproc.vim'
 NeoBundle 'https://github.com/Shougo/unite.vim'
 NeoBundle 'https://github.com/Shougo/neocomplcache'
 NeoBundle 'https://github.com/Shougo/neosnippet'
+NeoBundle 'https://github.com/Shougo/neosnippet-snippets'
 NeoBundle 'https://github.com/thinca/vim-quickrun'
 NeoBundle 'https://github.com/thinca/vim-ref'
 NeoBundle 'https://github.com/mattn/zencoding-vim'
@@ -103,11 +104,11 @@ set cindent
 "TOGGLE LINE NUMBER
 nnoremap ,n :<C-u>call ToggleNum()<CR>
 function! ToggleNum()
-if &number ==# '1'
-set nonumber
-else
-set number
-endif
+    if &number ==# '1'
+        set nonumber
+    else
+        set number
+    endif
 endfunction
 
 "CHANGE SIZE
@@ -148,7 +149,6 @@ set shiftwidth=4
 set fileencodings=iso-2022-jp,cp932,sjis,euc-jp,utf-8
 set fileencoding=utf-8
 set hls
-set tags=$HOME/.tags/tags,$HOME/.tags/gree_tags,$HOME/.tags/gree_default_tags
 set foldmethod=marker
 set background=dark
 set laststatus=2
@@ -180,7 +180,6 @@ function! SetTplFolding()
     set foldmethod=marker
     set foldmarker=<<<,>>>
 endfunction
-
 
 autocmd BufReadPre *.tpl call SetTplFolding()
 
@@ -228,6 +227,43 @@ let g:unite_source_tag_max_fname_length=1023
 let g:unite_source_tag_max_name_length=0
 let g:unite_source_tag_max_candidate_length=4095
 
+
 source ~/.vimrc_encode
 map <C-e><C-e> :e ++enc=euc-jp<CR>
 
+let g:repo_type = 'ayc'
+let g:repo_settings = {
+\   'knight' : {
+\       'ctags' : {
+\           'target'    : '',
+\           'exe'       : '',
+\           'code_root' : '',
+\           'out_path'  : '',
+\           'in_path'   : '',
+\       },
+\   },
+\   'ayc' : {
+\       'ctags' : {
+\           'target'    : '*.cs',
+\           'exe'       : '!/usr/local/bin/ctags',
+\           'code_root' : $HOME . '/attackyourcastle/Assets',
+\           'out_path'  : $HOME . '/.tags/ayc.tag',
+\           'in_path'   : $HOME . '/.tags/ayc.tag',
+\       },
+\   },
+\}
+
+function! UpdateTags()
+    let b:stg = g:repo_settings[g:repo_type]
+    if b:stg.ctags.exe==#''
+        return
+    endif
+    execute b:stg.ctags.exe
+\       . " -f " . b:stg.ctags.out_path
+\       . " -R " . b:stg.ctags.code_root
+    echo b:stg.ctags.code_root
+    echo b:stg.ctags.out_path
+endfunction
+
+execute "autocmd BufWritePre " . repo_settings[repo_type].ctags.target . " call UpdateTags()"
+execute "set tags=" . repo_settings[repo_type].ctags.in_path
