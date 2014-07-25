@@ -14,7 +14,6 @@ NeoBundle 'https://github.com/Shougo/neosnippet'
 NeoBundle 'https://github.com/Shougo/neosnippet-snippets'
 NeoBundle 'https://github.com/thinca/vim-quickrun'
 NeoBundle 'https://github.com/thinca/vim-ref'
-NeoBundle 'https://github.com/mattn/zencoding-vim'
 NeoBundle 'https://github.com/tpope/vim-surround'
 NeoBundle 'https://github.com/tpope/vim-fugitive'
 NeoBundle 'https://github.com/kana/vim-smartinput'
@@ -24,7 +23,6 @@ NeoBundle 'https://github.com/vim-scripts/yanktmp.vim'
 NeoBundle 'https://github.com/itchyny/lightline.vim'
 NeoBundle 'https://github.com/altercation/solarized'
 NeoBundle 'https://github.com/t9md/vim-quickhl'
-NeoBundle 'https://github.com/vim-scripts/taglist.vim'
 NeoBundle 'https://github.com/vim-scripts/YankRing.vim'
 NeoBundle 'https://github.com/scrooloose/syntastic'
 NeoBundle 'https://github.com/osyo-manga/vim-over'
@@ -32,6 +30,11 @@ NeoBundle 'https://github.com/OrangeT/vim-csharp'
 NeoBundle 'https://github.com/thinca/vim-threes'
 NeoBundle 'joonty/vdebug'
 NeoBundle 'https://github.com/syrntms/unite-tag'
+NeoBundle 'mattn/emmet-vim'
+NeoBundle 'skwp/greplace.vim'
+NeoBundle 'majutsushi/tagbar'
+NeoBundle 'arecarn/crunch'
+NeoBundle 'tpope/vim-speeddating'
 "TO HERE THIS IS NEOBUNDLE SETTINGS
 
 "FROM HERE THIS IS NEOCOMPLCACHE SETTINGS
@@ -93,6 +96,7 @@ let g:ref_open = "vsplit"
 "TO HERE THIS IS VIMREF SETTINGS
 "FROM HERE THIS IS UNITE VIM SETTINGS
 let g:unite_source_file_mru_limit = 500
+let g:unite_enable_start_insert = 1
 "TO HERE THIS IS UNITE VIM SETTINGS
 
 command! RL :source $MYVIMRC
