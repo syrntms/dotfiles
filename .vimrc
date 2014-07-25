@@ -99,6 +99,10 @@ let g:unite_source_file_mru_limit = 500
 let g:unite_enable_start_insert = 1
 "TO HERE THIS IS UNITE VIM SETTINGS
 
+"FROM HERE THIS IS TAGBAR SETTINGS
+let g:tagbar_left = 1
+"TO HERE THIS IS TAGBAR SETTINGS
+
 command! RL :source $MYVIMRC
 nnoremap <Space>. :edit $MYVIMRC<CR>
 nnoremap <ESC><ESC> :nohl<CR>
@@ -135,7 +139,7 @@ nnoremap <Nul>gb : Gblame<CR>
 nnoremap <Nul>a  : Align<Space>
 vnoremap <Nul>a  : Align<Space>
 nnoremap <Nul>rd :execute 'Ref phpmanual ' . expand('<cword>') <CR>
-nnoremap <Nul>tl :Tlist <CR> <C-w>w
+nnoremap <Nul>tb :TagbarToggle<CR> <C-w>w
 inoremap <Nul>z, <C-y>,
 cnoremap %s/ OverCommandLine<CR>%s/
 "TO HERE THIS IS REMAPKEYS SETTINGS
