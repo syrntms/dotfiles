@@ -35,6 +35,7 @@ NeoBundle 'skwp/greplace.vim'
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'arecarn/crunch'
 NeoBundle 'tpope/vim-speeddating'
+NeoBundle 'h1mesuke/unite-outline'
 "TO HERE THIS IS NEOBUNDLE SETTINGS
 
 "FROM HERE THIS IS NEOCOMPLCACHE SETTINGS
@@ -125,6 +126,14 @@ nnoremap ,k <C-w>-<CR>
 nnoremap ,j <C-w>+<CR>
 nnoremap ,l <C-w><<CR>
 
+"RELOARD SOURCE
+nnoremap ,s :source $MYVIMRC<CR>
+
+function! g:E(error)
+    redir >> ~/vimerror
+    echo string(a:error)
+    redir END
+endfunction
 
 "FROM HERE THIS IS REMAPKEYS SETTINGS
 nnoremap <C-h>   : vert help<Space>
@@ -230,7 +239,6 @@ autocmd BufEnter *
 \    if empty(&buftype)
 \|   nnoremap <buffer> <C-]> :<C-u>UniteWithCursorWord -horizontal -immediately -multi-line tag<CR>
 \|   endif
-let g:unite_source_tag_strict_truncate_string=0
 let g:unite_source_tag_max_fname_length=1023
 let g:unite_source_tag_max_name_length=0
 let g:unite_source_tag_max_candidate_length=4095
@@ -277,3 +285,5 @@ endfunction
 
 execute "autocmd BufWritePre " . repo_settings[repo_type].ctags.target . " call UpdateTags()"
 execute "set tags=" . repo_settings[repo_type].ctags.in_path
+
+
