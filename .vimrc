@@ -36,6 +36,7 @@ NeoBundle 'majutsushi/tagbar'
 NeoBundle 'arecarn/crunch'
 NeoBundle 'tpope/vim-speeddating'
 NeoBundle 'h1mesuke/unite-outline'
+NeoBundle 'vim-scripts/PDV--phpDocumentor-for-Vim'
 "TO HERE THIS IS NEOBUNDLE SETTINGS
 
 "FROM HERE THIS IS NEOCOMPLCACHE SETTINGS
@@ -77,6 +78,8 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 if has('conceal')
     set conceallevel=2 concealcursor=i
 endif
+" Tell Neosnippet about the other snippets
+let g:neosnippet#snippets_directory='~/.vim/bundle/neosnippet-snippets/neosnippets/'
 
 "FROM HERE THIS IS VIMREF SETTINGS
 let g:ref_source_webdict_sites = {
@@ -151,6 +154,11 @@ nnoremap <Nul>rd :execute 'Ref phpmanual ' . expand('<cword>') <CR>
 nnoremap <Nul>tb :TagbarToggle<CR> <C-w>w
 inoremap <Nul>z, <C-y>,
 cnoremap %s/ OverCommandLine<CR>%s/
+nnoremap <Nul>calc :CrunchLine<CR>
+
+autocmd FileType php inoremap <Nul>bd <ESC>:call PhpDocSingle()<CR>
+autocmd FileType php nnoremap <Nul>bd :call PhpDocSingle()<CR>
+autocmd FileType php vnoremap <Nul>bd :call PhpDocRange()<CR>
 "TO HERE THIS IS REMAPKEYS SETTINGS
 
 
@@ -235,6 +243,7 @@ nmap <Space>hc <Plug>(quickhl-cword-toggle)
 nmap <Space>ht <Plug>(quickhl-tag-toggle)
 "TO HERE QUICKHL PLUGZIN SETTING
 
+"unite tag janp setting
 autocmd BufEnter *
 \    if empty(&buftype)
 \|   nnoremap <buffer> <C-]> :<C-u>UniteWithCursorWord -horizontal -immediately -multi-line tag<CR>
@@ -247,6 +256,7 @@ let g:unite_source_tag_max_candidate_length=4095
 source ~/.vimrc_encode
 map <C-e><C-e> :e ++enc=euc-jp<CR>
 
+"REPOSITORY SETTING
 let g:repo_type = 'knight'
 let g:repo_settings = {
 \   'knight' : {
@@ -285,5 +295,4 @@ endfunction
 
 execute "autocmd BufWritePre " . repo_settings[repo_type].ctags.target . " call UpdateTags()"
 execute "set tags=" . repo_settings[repo_type].ctags.in_path
-
 
