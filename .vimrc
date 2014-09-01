@@ -25,18 +25,18 @@ NeoBundle 'https://github.com/altercation/solarized'
 NeoBundle 'https://github.com/t9md/vim-quickhl'
 NeoBundle 'https://github.com/vim-scripts/YankRing.vim'
 NeoBundle 'https://github.com/scrooloose/syntastic'
-NeoBundle 'https://github.com/osyo-manga/vim-over'
 NeoBundle 'https://github.com/OrangeT/vim-csharp'
 NeoBundle 'https://github.com/thinca/vim-threes'
-NeoBundle 'joonty/vdebug'
 NeoBundle 'https://github.com/syrntms/unite-tag'
+NeoBundle 'syrntms/am.vim'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'skwp/greplace.vim'
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'arecarn/crunch'
 NeoBundle 'tpope/vim-speeddating'
-NeoBundle 'h1mesuke/unite-outline'
 NeoBundle 'vim-scripts/PDV--phpDocumentor-for-Vim'
+NeoBundle 'mattn/webapi-vim'
+NeoBundle 'kana/vim-metarw'
 "TO HERE THIS IS NEOBUNDLE SETTINGS
 
 "FROM HERE THIS IS NEOCOMPLCACHE SETTINGS
@@ -49,16 +49,14 @@ let g:neocomplcache_max_list = 20
 let g:neocomplcache_min_syntax_length = 3
 "TO HERE THIS IS NEOCOMPLCACHE SETTINGS
 
-"FROM VIM OVER SETTINGS
-let g:over_enable_cmd_window = 1
-"TO VIM OVER SETTINGS
-
 "FROM HERE THIS IS VIMFILER SETTINGS
 let g:vimfiler_as_default_explorer = 1
 "TO HERE THIS IS VIMFILERSETTINGS
 
 "FROM HERE THIS IS SYNTASTICS SETTINGS
 let g:syntastic_always_populate_loc_list=1
+let g:syntastic_cpp_compiler = 'clang++'
+let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
 "TO HERE THIS IS SYNTASTICS SETTINGS
 
 "Plugin key-mapping
@@ -128,6 +126,7 @@ nnoremap ,h <C-w>><CR>
 nnoremap ,k <C-w>-<CR>
 nnoremap ,j <C-w>+<CR>
 nnoremap ,l <C-w><<CR>
+nnoremap ,v :@"<CR>
 
 "RELOARD SOURCE
 nnoremap ,s :source $MYVIMRC<CR>
@@ -144,7 +143,6 @@ nnoremap <Nul>rw : Ref webdict wiki<Space>
 nnoremap <Nul>rj : Ref webdict je<Space>
 nnoremap <Nul>re : Ref webdict ej<Space>
 nnoremap <Nul>f  : VimFiler<CR>
-nnoremap <Nul>x  : QuickRun<CR>
 nnoremap <Nul>ru : Unite file_mru<CR>
 nnoremap <Nul>gd : Gdiff 
 nnoremap <Nul>gb : Gblame<CR>
@@ -153,8 +151,9 @@ vnoremap <Nul>a  : Align<Space>
 nnoremap <Nul>rd :execute 'Ref phpmanual ' . expand('<cword>') <CR>
 nnoremap <Nul>tb :TagbarToggle<CR> <C-w>w
 inoremap <Nul>z, <C-y>,
-cnoremap %s/ OverCommandLine<CR>%s/
 nnoremap <Nul>calc :CrunchLine<CR>
+nnoremap <Nul>x :QuickRun<CR>
+
 
 autocmd FileType php inoremap <Nul>bd <ESC>:call PhpDocSingle()<CR>
 autocmd FileType php nnoremap <Nul>bd :call PhpDocSingle()<CR>
@@ -296,3 +295,8 @@ endfunction
 execute "autocmd BufWritePre " . repo_settings[repo_type].ctags.target . " call UpdateTags()"
 execute "set tags=" . repo_settings[repo_type].ctags.in_path
 
+source ~/.vim/bundle/am.vim/autoload/am.vim
+nnoremap <Nul>mp :AmParagraph<CR>
+nnoremap <Nul>ms :AmSentence<CR>
+nnoremap <Nul>mt :Amtest<CR>
+nnoremap <Nul>md :AmDirect 
