@@ -14,6 +14,7 @@
 	di = diff
 	dc = diff --cached
 	br = branch
+	bra = for-each-ref --sort=-committerdate --format='%(color:red)%(authordate:iso)%(color:reset) %(color:green)[%(authorname)]%(color:reset) %(color:yellow)%(refname:short)%(color:reset)' --color
 	cb = checkout -b
 	sw = checkout
 	mup = submodule update --init --recursive
@@ -61,7 +62,17 @@
 	www = browse-remote
 	ds = diff --stat
 	sti = -p status --ignore-submodules
+    pushf = push --force-with-lease --force-if-includes
 [diff]
 	wordRegex = [@$%]*[[:alnum:]_]+|[^\n]
 [http]
-	postBuffer = 10485760
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[user]
+	email = noriyoshi.samata@dena.com
+	name = noriyoshi.samata
+[url "git@github.dena.jp:"]
+  insteadOf = https://github.dena.jp/
