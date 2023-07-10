@@ -71,8 +71,3 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-[user]
-	email = noriyoshi.samata@dena.com
-	name = noriyoshi.samata
-[url "git@github.dena.jp:"]
-  insteadOf = https://github.dena.jp/
