@@ -1,20 +1,22 @@
-"set nocompatible              " be iMproved, required
-"filetype off                  " required
-"
-"" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+"vim
+let s:jetpackfile = expand('<sfile>:p:h') .. '/pack/jetpack/opt/vim-jetpack/plugin/jetpack.vim'
+let s:jetpackurl = "https://raw.githubusercontent.com/tani/vim-jetpack/master/plugin/jetpack.vim"
+if !filereadable(s:jetpackfile)
+  call system(printf('curl -fsSLo %s --create-dirs %s', s:jetpackfile, s:jetpackurl))
+endif
+
+packadd vim-jetpack
+call jetpack#begin()
+Jetpack "tani/vim-jetpack"
+Jetpack 't9md/vim-quickhl'
+Jetpack 'scrooloose/syntastic'
+call jetpack#end()
 
 
-Plugin 'Shougo/neocomplete'
-Plugin 'thinca/vim-surround'
-Plugin 'kana/vim-smartinput'
-Plugin 'vim-scripts/Align'
-Plugin 't9md/vim-quickhl'
-Plugin 'scrooloose/syntastic'
-
-call vundle#end()            " required
-filetype plugin indent on    " required"
+filetype plugin indent on    " required
 syntax enable
 
 nnoremap <ESC><ESC> :nohl<CR>
@@ -55,17 +57,15 @@ set ic
 set softtabstop=4
 set tabstop=4
 set shiftwidth=4
-set fileencodings=iso-2022-jp,cp932,sjis,euc-jp,utf-8
 set fileencoding=utf-8
+"set fileencodings=iso-2022-jp,cp932,sjis,euc-jp,utf-8
 set hls
 set foldmethod=marker
 set background=dark
 set laststatus=2
 set ambiwidth=double
 set linespace=30
-set bomb
-colorscheme solarized
-let g:solarized_termtrans=1
+set nobomb
 set t_Co=256
 
 
@@ -104,3 +104,4 @@ xmap <Space>hr <Plug>(quickhl-manual-reset)
 nmap <Space>hc <Plug>(quickhl-cword-toggle)
 nmap <Space>ht <Plug>(quickhl-tag-toggle)
 "TO HERE QUICKHL PLUGZIN SETTING
+
