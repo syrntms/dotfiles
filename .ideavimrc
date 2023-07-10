@@ -1,0 +1,6 @@
+noremap <Space>hl <ESC>viw:action MultiHighlight<CR><ESC>
+noremap <ESC><ESC> :action MultiHighlight.ClearAction<CR>
+set smartcase
+set visualbell
+set noerrorbells
+set surround
